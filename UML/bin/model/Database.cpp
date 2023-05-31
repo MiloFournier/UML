@@ -311,15 +311,15 @@
         
     }
 
-    unordered_map<string, Capteur>& Database::getMCapteurs(){
+    unordered_map<string, Capteur> Database::getMCapteurs(){
         return m_capteurs;
     }
 
-    unordered_map<string, Fournisseur>& Database::getMFournisseurs(){
+    unordered_map<string, Fournisseur> Database::getMFournisseurs(){
         return m_fournisseurs;
     }
 
-    unordered_map<string, Particulier>& Database::getMParticuliers(){
+    unordered_map<string, Particulier> Database::getMParticuliers(){
         return m_particuliers;
     }
 

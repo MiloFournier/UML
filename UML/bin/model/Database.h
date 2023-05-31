@@ -70,11 +70,11 @@ public:
 
     void InitCapteurs();
 
-    unordered_map<string, Capteur>& getMCapteurs();
+    unordered_map<string, Capteur> getMCapteurs();
 
-    unordered_map<string, Fournisseur>& getMFournisseurs();
+    unordered_map<string, Fournisseur> getMFournisseurs();
 
-    unordered_map<string, Particulier>& getMParticuliers();
+    unordered_map<string, Particulier> getMParticuliers();
 
 //-------------------------------------------- Constructeurs - destructeur
     Database ();
