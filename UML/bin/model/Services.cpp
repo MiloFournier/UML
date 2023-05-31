@@ -24,7 +24,7 @@
         // Parcours de tous les capteurs
         //cout << data->getMCapteurs().size() << endl;
         const auto& it = listeDesCapteurs.begin();
-        cout << "size de listeDesCapteurs: " << listeDesCapteurs.size() << endl;
+        //cout << "size de listeDesCapteurs: " << listeDesCapteurs.size() << endl;
         for (const auto& capteurTest : listeDesCapteurs) { //le for bug
         // Vérification de la distance entre capteurParam et capteurTest
             cout << "   valeur de capteurTest.second.calculDistance(capteurParam): "<< capteurTest.second.calculDistance(capteurParam) << endl;
@@ -37,10 +37,10 @@
                         cout << "j.first: " << j.first << endl;
                         //i.first.erase(0, 1);
                         string str;
-                        str = i.first;
+                        str = j.first;
                         str.erase(0, 1);
                         //cout << str << endl;
-                        if(str.erase(0, 1) == j.first) {
+                        if(str.erase(0, 1) == i.first) {
                             cout << "    vérification de la date: ok" << endl;
                             cout << "    i.second.getValeur(): " << i.second.getValeur() << endl;
                             cout << "    j.second.getValeur(): " << j.second.getValeur() << endl;
