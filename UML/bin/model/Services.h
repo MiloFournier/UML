@@ -19,7 +19,6 @@ class Services {
 
         //services
         bool verifierEtatCapteur(Capteur capteurParam);
-        double[] obtenirQualiteAirPosition(Coordonnee coordonneeParam, Date dateParam);
         double quantifierImpactPurificateur(Purificateur purificateurParam);
 };
 
