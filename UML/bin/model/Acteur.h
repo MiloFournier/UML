@@ -1,13 +1,14 @@
 #if ! defined ( ACTEUR_H)
 #define ACTEUR_H
 
-using namespace std;
 #include <iostream>
 #include <fstream>
 #include <cstring>
 #include <utility>
 #include <fstream>
 #include <string>
+
+using namespace std;
 
 class Acteur {
 
