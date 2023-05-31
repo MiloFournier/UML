@@ -61,7 +61,7 @@
                         }
                     }
                 }
-                compteur += 4;
+                
                 /*if (comparerDates(capteurParam.getMesures(), capteurTest.getMesures()) <= limiteDeTemps) {
                     // Parcours des gaz pour comparer les mesures
                     for (const auto& gaz : listeDesGaz) {
@@ -73,8 +73,12 @@
                     compteur += 4; // Ajouter le nombre de mesures comparées (4 gaz)
                 }*/
             }
+            compteur += 4;
         }
-        double tauxErreur = (compteurErreurs / compteur) * 100.0;
+        double tauxErreur = 0; 
+        if (compteur){
+            tauxErreur = (compteurErreurs / compteur) * 100.0;
+        }
         bool dysfonctionnel = false;
 
         if (tauxErreur > 70.0) {
