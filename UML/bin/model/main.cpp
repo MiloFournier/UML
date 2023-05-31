@@ -44,6 +44,7 @@ int main(int argc, char** argv) {
     Services *s = new Services();
     cout << "création des services: ok" << endl;
     unordered_map<string, Capteur> capt = data->getMCapteurs();
+    cout << "taille de capt: " << capt.size() << endl;
     cout << "création de l'unordered_map des capteurs: ok" << endl;
     unordered_map<string, Capteur>::iterator it = capt.find("Sensor1");
     cout << "création de l'itérateur pour la map: ok" << endl;
@@ -54,7 +55,7 @@ int main(int argc, char** argv) {
     cout << "Capteur ID :" << c.getId() << endl;
 
     // Erreur ici
-    bool b = s->verifierEtatCapteur(c);
+    bool b = s->verifierEtatCapteur(c, *data);
     cout << "vérification de l'état du capteur: ok" << endl;
 
     cout << "L'état du capteur est: " << b << endl;
