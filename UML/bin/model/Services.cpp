@@ -23,11 +23,13 @@
         //cout << data->getMCapteurs().size() << endl;
         const auto& it = listeDesCapteurs.begin();
         //cout << "size de listeDesCapteurs: " << listeDesCapteurs.size() << endl;
-        for (const auto& capteurTest : listeDesCapteurs) { //le for bug
+        if(listeDesCapteurs.size() != 0)
+            cout << "   distance aux autres capteurs: " << endl;
+        for (const auto& capteurTest : listeDesCapteurs) {
         // Vérification de la distance entre capteurParam et capteurTest
-            cout << "\n   valeur de capteurTest.second.calculDistance(capteurParam): "<< capteurTest.second.calculDistance(capteurParam) << endl;
+            cout << "           " << capteurTest.second.calculDistance(capteurParam); //<< endl;
             if (capteurTest.second.calculDistance(capteurParam) < distanceDeVerification && capteurTest.second.calculDistance(capteurParam) != 0) {
-                cout << "   vérification de la distance: ok" << endl;
+                cout << " (distance: ok)";
                 // Vérification de la date des mesures
                 for(const auto &i : capteurParam.getLMesures_O3()) {
                     for(const auto &j : capteurTest.second.getLMesures_O3()) {
@@ -45,7 +47,7 @@
                             //cout << "    abs(i.second.getValeur() - j.second.getValeur()): " << abs(i.second.getValeur() - j.second.getValeur()) << endl;
                             //cout << "    limiteDeMesure " << limiteDeMesure << endl;
                             if(abs(i.second.getValeur() - j.second.getValeur()) >= limiteDeMesure) {
-                                cout << "   vérification de la limite de valeur: ok" << endl;
+                                //cout << "   vérification de la limite de valeur: ok" << endl;
                                 compteurErreurs++;
                                 //cout << "    compteurErreurs " << compteurErreurs << endl;
                             }
@@ -81,15 +83,16 @@
                 }
                 compteur += 4;
             }
+            cout << endl;
         }
-        double tauxErreur = 0; 
-        cout << "\n      compteurErreurs: " << compteurErreurs << endl;
-        cout << "      compteur: " << compteur << endl;
+        double tauxErreur = 0;
+        cout << "\n   compteurErreurs: " << compteurErreurs << endl;
+        cout << "   compteur: " << compteur << endl;
         if (compteur>0){
             // Le cast est obligatoire sinon le résultat de la division est 0
             tauxErreur = (static_cast<double>(compteurErreurs) / compteur) * 100.0;
         }
-        cout << "      tauxErreur: " << tauxErreur << endl;
+        cout << "   tauxErreur: " << tauxErreur << endl;
         bool dysfonctionnel = false;
         if (tauxErreur > 70.0) {
             dysfonctionnel = true;
@@ -99,7 +102,7 @@
         } else {
             capteurParam.setEstFonctionnel(true); 
         }
-        cout << "      dysfonctionnel: " << dysfonctionnel << "\n\n" <<endl;
+        cout << "   dysfonctionnel: " << dysfonctionnel << "\n\n" <<endl;
         return dysfonctionnel;
     }
     // code existant dans d'autres fichiers à insérer ici

@@ -46,11 +46,16 @@ int main(int argc, char** argv) {
     unordered_map<string, Capteur> capt = data->getMCapteurs();
     //cout << "taille de capt: " << capt.size() << endl;
     //cout << "création de l'unordered_map des capteurs: ok" << endl;
-    unordered_map<string, Capteur>::iterator it = capt.find("Sensor0");
+    string sensorSearch;
+    cout << "Entrez le nom d'un Capteur pour vérifier s'il est Fonctionnel: ";
+    cin >> sensorSearch;
+    unordered_map<string, Capteur>::iterator it = capt.find(sensorSearch);
     //cout << "création de l'itérateur pour la map: ok" << endl;
-     if(it == capt.end())
-        cout << "erreur: le sensor n'est pas trouvé" << endl;
-    Capteur c = it->second; 
+     if(it == capt.end()) {
+         cout << "erreur: le sensor n'est pas trouvé" << endl;
+         return 0;
+     }
+    Capteur c = it->second;
     //cout << "recherche de it->second: ok" << endl;
     cout << "Capteur ID: " << c.getId() << endl;
 
