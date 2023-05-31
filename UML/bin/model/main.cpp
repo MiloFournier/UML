@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     //cout << "taille de capt: " << capt.size() << endl;
     //cout << "création de l'unordered_map des capteurs: ok" << endl;
     string sensorSearch;
-    cout << "Entrez le nom d'un Capteur pour vérifier s'il est Fonctionnel: ";
+    cout << "Entrez l'Identifiant d'un Capteur pour vérifier s'il est Fonctionnel: ";
     cin >> sensorSearch;
     unordered_map<string, Capteur>::iterator it = capt.find(sensorSearch);
     //cout << "création de l'itérateur pour la map: ok" << endl;
