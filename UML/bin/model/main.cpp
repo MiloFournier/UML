@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
         cout << "erreur: le sensor n'est pas trouvé" << endl;
     Capteur c = it->second; 
     //cout << "recherche de it->second: ok" << endl;
-    cout << "Capteur ID :" << c.getId() << endl;
+    cout << "Capteur ID: " << c.getId() << endl;
 
     // Erreur ici
     bool avant = c.getEstFonctionnel();
