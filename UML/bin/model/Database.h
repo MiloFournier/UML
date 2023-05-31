@@ -10,7 +10,6 @@
 #if ! defined ( Database_H )
 #define Database_H
 
-using namespace std;
 #include <iostream>
 #include "Purificateur.h"
 #include "Fournisseur.h"
