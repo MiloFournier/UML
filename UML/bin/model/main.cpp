@@ -44,12 +44,14 @@ int main(int argc, char** argv) {
     cout << "Service" << endl; 
     unordered_map<string, Capteur> capt = data->getMCapteurs();
     cout << "Uno-map" << endl; 
-    unordered_map<string, Capteur>::iterator it = capt.find("Sensor0"); 
+    unordered_map<string, Capteur>::iterator it = capt.find("Sensor1"); 
      if(it == capt.end())
         cout << "null" << endl;
     Capteur c = it->second; 
     cout << "bug ici?" << endl;
-    cout << "Capteur" << c.getId() << endl; 
+    cout << "Capteur :" << c.getId() << endl; 
+
+    // Erreur ici
     bool b = s->verifierEtatCapteur(c);
 
     cout << "L'état du capteur est " << b << endl; 
