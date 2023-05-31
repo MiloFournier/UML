@@ -37,24 +37,27 @@ using namespace std;
 #endif
 
 int main(int argc, char** argv) {
-    
     Database *data = new Database();
+    cout << "création de la data base: ok" << endl;
     data->InitCapteurs();
-    Services *s = new Services(); 
-    cout << "Service" << endl; 
+    cout << "initialisation des capteurs: ok" << endl;
+    Services *s = new Services();
+    cout << "création des services: ok" << endl;
     unordered_map<string, Capteur> capt = data->getMCapteurs();
-    cout << "Uno-map" << endl; 
-    unordered_map<string, Capteur>::iterator it = capt.find("Sensor1"); 
+    cout << "création de l'unordered_map des capteurs: ok" << endl;
+    unordered_map<string, Capteur>::iterator it = capt.find("Sensor1");
+    cout << "création de l'itérateur pour la map: ok" << endl;
      if(it == capt.end())
-        cout << "null" << endl;
+        cout << "erreur: le sensor n'est pas trouvé" << endl;
     Capteur c = it->second; 
-    cout << "bug ici?" << endl;
-    cout << "Capteur :" << c.getId() << endl; 
+    cout << "recherche de it->second: ok" << endl;
+    cout << "Capteur ID :" << c.getId() << endl;
 
     // Erreur ici
     bool b = s->verifierEtatCapteur(c);
+    cout << "vérification de l'état du capteur: ok" << endl;
 
-    cout << "L'état du capteur est " << b << endl; 
+    cout << "L'état du capteur est: " << b << endl;
 
     // Affichage des fournisseurs
     // unordered_map<string, Particulier> parti = data->getMParticuliers();

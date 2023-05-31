@@ -65,5 +65,5 @@ Capteur &Capteur::operator=(Capteur CapteurParam){
 
 //destructeur
 Capteur::~Capteur() {
-    cout << "Appel au destructeur de Capteur" << endl;
+    //cout << "Appel au destructeur de Capteur" << endl;
 }

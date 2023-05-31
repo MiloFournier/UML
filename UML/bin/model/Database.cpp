@@ -30,7 +30,7 @@
         ifstream fic;
         fic.open("../../tables/providers.csv");
 
-        cout << "Je suis la (LireFournisseurs) !" << endl; 
+        //cout << "Je suis la (LireFournisseurs) !" << endl;
         /*recuperer les informations depuis le fichier*/
         while (FinFichier(fic) == false){ 
             string recupProvider = "null";
@@ -81,7 +81,7 @@
         }
     
    
-        cout << "J'ai terminé avec LireFournisseurs' !" << endl; 
+        //cout << "J'ai terminé avec LireFournisseurs' !" << endl;
         fic.close();
     }
 
@@ -98,7 +98,7 @@
         /*recherche dans le fichier des informations de notre cleaner*/
         bool trouve = false;
 
-        cout << "Je suis la (LirePurificateurs) !" << endl; 
+        //cout << "Je suis la (LirePurificateurs) !" << endl;
 
         while(trouve ==false && FinFichier(fic) == false){
             if(fic.eof()) break; 
@@ -129,7 +129,7 @@
 
         Coordonnee cor = Coordonnee(lat, lon);
         Purificateur pur = Purificateur(cor, id, deb, fin);
-        cout << "J'ai terminé avec LirePurificateurs !" << endl; 
+        //cout << "J'ai terminé avec LirePurificateurs !" << endl;
 
         fic.close();
         return pur;
@@ -147,7 +147,7 @@
             string test; 
             getline(fic, recupUser,';');
             getline(fic, recupSensor,';');
-            cout << "recupSensor: " << recupSensor << endl;
+            //cout << "recupSensor: " << recupSensor << endl;
             getline(fic, test); 
             
             Capteur cap = LireCapteurs(recupSensor);
@@ -200,7 +200,7 @@
                 getline(fic, type, ';');
                 getline(fic, mesure, ';');
                 getline(fic, test); 
-                cout << "lecture" << endl;
+                //cout << "lecture" << endl;
                 unordered_map<string, Capteur>::iterator it = m_capteurs.find(idCapteur);
                 
                 Mesure m = Mesure(date, mesure, type);
@@ -221,13 +221,13 @@
 
 
     Capteur Database::LireCapteurs (string id){
-        cout << "je suis dans LireCapteurs" << endl;
+        //cout << "je suis dans LireCapteurs" << endl;
         ifstream fic; 
         fic.open("../../tables/jeuData.csv");
         string lat;
         string lon;
 
-        cout << "open fichiers ok" << endl;
+        //cout << "open fichiers ok" << endl;
 
         /*recherche dans le fichier des informations de notre cleaner*/
         bool trouve = false;
@@ -236,11 +236,11 @@
             if(fic.eof()) break; 
             string test;
             getline(fic, test, ';');
-            cout << "test: " << test << endl;
-            cout << "id: " << id << endl;
+            //cout << "test: " << test << endl;
+            //cout << "id: " << id << endl;
             /*si on a trouve le bon cleaner on cree l'objet*/
             if(test == id){
-                cout << "test == id" << endl;
+                //cout << "test == id" << endl;
                 getline(fic, lat, ';');
                 getline(fic, lon, ';');
                 getline(fic, test); 
@@ -285,17 +285,17 @@
                 getline(fic, lat, ';');
                 getline(fic, lon, ';');
                 getline(fic, saut);
-                cout << lat << endl;
-                cout << lon << endl;
-                cout << test<< endl;
+                //cout << lat << endl;
+                //cout << lon << endl;
+                //cout << test<< endl;
                 Coordonnee cor = Coordonnee(lat, lon);
-                cout << "coord" << endl;
+                //cout << "coord" << endl;
 
                 Capteur cap = Capteur(cor, test, true);
-                cout << "capt" << endl;
+                //cout << "capt" << endl;
                 m_capteurs.insert({test, cap});
                 lireMesures(test);
-                cout << "lire" << endl;
+                //cout << "lire" << endl;
                 i++;
         }
 

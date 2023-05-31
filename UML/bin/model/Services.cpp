@@ -17,18 +17,24 @@
         double limiteDeMesure = 5.0; // valeur limite de différence entre les mesures
         int compteurErreurs = 0;
         int compteur = 0;
-
+        cout << "    entrée dans la méthode verifierEtatCapteur: ok" << endl;
         Database *data = new Database();
         unordered_map<string, Capteur> listeDesCapteurs = data->getMCapteurs();
         // Parcours de tous les capteurs
-        for (const auto& capteurTest : listeDesCapteurs) {
+        const auto& it = listeDesCapteurs.begin();
+        cout << "size de listeDesCapteurs: " << listeDesCapteurs.size() << endl;
+        for (const auto& capteurTest : listeDesCapteurs) { //le for bug
         // Vérification de la distance entre capteurParam et capteurTest
+            cout << "   valeur de capteurTest.second.calculDistance(capteurParam): "<< capteurTest.second.calculDistance(capteurParam) << endl;
             if (capteurTest.second.calculDistance(capteurParam) < distanceDeVerification) {
+                cout << "    vérification de la distance: ok" << endl;
                 // Vérification de la date des mesures
                 for(const auto &i : capteurParam.getLMesures_O3()) {
                     for(const auto &j : capteurTest.second.getLMesures_O3()) {
                         if(i.first == j.first) {
+                            cout << "    vérification de la date: ok" << endl;
                             if(abs(i.second.getValeur() - j.second.getValeur()) > limiteDeMesure) {
+                                cout << "    vérification de la limite de valeur: ok" << endl;
                                 compteurErreurs++;
                             }
                         }
