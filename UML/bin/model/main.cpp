@@ -5,6 +5,7 @@
 #include "Database.h"
 #include "Purificateur.h"
 #include "Mesure.h"
+#include "Services.h"
 
 using namespace std;
 
@@ -38,20 +39,34 @@ using namespace std;
 int main(int argc, char** argv) {
     
     Database *data = new Database();
+    data->InitCapteurs();
+    Services *s = new Services(); 
+    cout << "Service" << endl; 
+    unordered_map<string, Capteur> capt = data->getMCapteurs();
+    cout << "Uno-map" << endl; 
+    unordered_map<string, Capteur>::iterator it = capt.find("Sensor0"); 
+     if(it == capt.end())
+        cout << "null" << endl;
+    Capteur c = it->second; 
+    cout << "bug ici?" << endl;
+    cout << "Capteur" << c.getId() << endl; 
+    bool b = s->verifierEtatCapteur(c);
+
+    cout << "L'état du capteur est " << b << endl; 
 
     // Affichage des fournisseurs
-    unordered_map<string, Particulier> parti = data->getMParticuliers();
-    cout << "Voici la liste des Particuliers" << endl; 
-    for (unordered_map<string, Particulier>::iterator it = parti.begin(); it != parti.end(); ++it){
-        cout << "hello" << endl;
-        const string& particulierId = it->first;
-        const Particulier& particulier = it->second;
-        cout << "ID_particulier: " << particulierId << endl;
-        list<Capteur>::iterator cap = it->second.getListeCapteurs().begin();
-        cout << "Capteur qui nous interesse" << cap->getEstFonctionnel();
-        //cout << "it->second : " << particulier;
+    // unordered_map<string, Particulier> parti = data->getMParticuliers();
+    // cout << "Voici la liste des Particuliers" << endl; 
+    // for (unordered_map<string, Particulier>::iterator it = parti.begin(); it != parti.end(); ++it){
+    //     cout << "hello" << endl;
+    //     const string& particulierId = it->first;
+    //     const Particulier& particulier = it->second;
+    //     cout << "ID_particulier: " << particulierId << endl;
+    //     list<Capteur>::iterator cap = it->second.getListeCapteurs().begin();
+    //     cout << "Capteur qui nous interesse" << cap->getEstFonctionnel();
+    //     //cout << "it->second : " << particulier;
         
-    }
+    // }
     
     // Autres informations du fournisseur si nécessaire
 

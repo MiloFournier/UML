@@ -137,17 +137,22 @@
 
     void Database::LireParticuliers(){
         ifstream fic;
-        fic.open("../../tables/users.csv");
+        fic.open("../../tables/jeuVide.csv");
 
         /*recuperer les informations depuis le fichier*/
         while(FinFichier(fic) == false){
             if(fic.eof()) break; 
             string recupUser;
             string recupSensor;
+            string test; 
             getline(fic, recupUser,';');
             getline(fic, recupSensor,';');
+            cout << "recupSensor: " << recupSensor << endl;
+            getline(fic, test); 
             
             Capteur cap = LireCapteurs(recupSensor);
+
+            m_capteurs.insert({cap.getId(), cap}); 
 
             unordered_map<string, Particulier>::iterator it = m_particuliers.find(recupUser);
 
@@ -178,7 +183,7 @@
     void Database::lireMesures(string idCapteur) {
 
         ifstream fic;
-        fic.open("../../tables/measurments.csv");
+        fic.open("../../tables/mesuresVide.csv");
 
         string date;
         string test;
@@ -194,8 +199,10 @@
             if (test == idCapteur) {
                 getline(fic, type, ';');
                 getline(fic, mesure, ';');
-
+                getline(fic, test); 
+                cout << "lecture" << endl;
                 unordered_map<string, Capteur>::iterator it = m_capteurs.find(idCapteur);
+                
                 Mesure m = Mesure(date, mesure, type);
 
                 if (type == "O3") {
@@ -214,11 +221,13 @@
 
 
     Capteur Database::LireCapteurs (string id){
+        cout << "je suis dans LireCapteurs" << endl;
         ifstream fic; 
-        fic.open("../../tables/sensors.csv");
+        fic.open("../../tables/jeuData.csv");
         string lat;
         string lon;
 
+        cout << "open fichiers ok" << endl;
 
         /*recherche dans le fichier des informations de notre cleaner*/
         bool trouve = false;
@@ -227,16 +236,21 @@
             if(fic.eof()) break; 
             string test;
             getline(fic, test, ';');
+            cout << "test: " << test << endl;
+            cout << "id: " << id << endl;
             /*si on a trouve le bon cleaner on cree l'objet*/
             if(test == id){
+                cout << "test == id" << endl;
                 getline(fic, lat, ';');
                 getline(fic, lon, ';');
+                getline(fic, test); 
                 trouve = true;
 
             /*sinon on passe au prochain purificateur*/
             }else{
                 getline(fic, test, ';');
                 getline(fic, test, ';');
+                //getline(fic, test); 
             }
         }
 
@@ -255,6 +269,47 @@
         return cap; 
         
     }//----- Fin de LireCapteurs
+
+    void Database::InitCapteurs() {
+        ifstream fic; 
+        fic.open("../../tables/jeuData.csv");
+        string lat;
+        string lon;
+        string test;
+        string saut;
+        int i = 0;
+        while(FinFichier(fic) == false){
+            if(fic.eof()) break; 
+            getline(fic, test, ';');
+            /*si on a trouve le bon cleaner on cree l'objet*/
+                getline(fic, lat, ';');
+                getline(fic, lon, ';');
+                getline(fic, saut);
+                cout << lat << endl;
+                cout << lon << endl;
+                cout << test<< endl;
+                Coordonnee cor = Coordonnee(lat, lon);
+                cout << "coord" << endl;
+
+                Capteur cap = Capteur(cor, test, true);
+                cout << "capt" << endl;
+                m_capteurs.insert({test, cap});
+                lireMesures(test);
+                cout << "lire" << endl;
+                i++;
+        }
+
+        fic.close();
+
+        
+
+        /*ensuite on ajoute les mesures dans le capteur*/
+        
+
+
+        
+        
+    }
 
     unordered_map<string, Capteur> Database::getMCapteurs(){
         return m_capteurs;
@@ -275,7 +330,7 @@
     //
     {
         LireFournisseurs();
-        LireParticuliers();
+        //LireParticuliers();
     #ifdef MAP
         cout << "Appel au constructeur de <Database>" << endl;
     #endif

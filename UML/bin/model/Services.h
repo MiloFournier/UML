@@ -8,6 +8,7 @@
 #include "Capteur.h"
 #include "Database.h"
 #include "Purificateur.h"
+    #include <stdbool.h>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ class Services {
 
         //services
         bool verifierEtatCapteur(Capteur capteurParam);
-        double quantifierImpactPurificateur(Purificateur purificateurParam);
+        //double quantifierImpactPurificateur(Purificateur purificateurParam);
 };
 
 #endif //GL_ET_UML_SERVICES_H

@@ -10,13 +10,13 @@ using namespace std;
 //constructeur par défaut
 Purificateur::Purificateur()
     : Appareil(), m_demarrage(""), m_arret("") { //test avec Kous pour Appareil() ou pas
-    cout << "Appel au constructeur par défaut de Purificateur" << endl;
+    //cout << "Appel au constructeur par défaut de Purificateur" << endl;
 }
 
 //constructeur paramétré
 Purificateur::Purificateur(Coordonnee c, string s, string demarrage, string arret)
     : Appareil(c, s), m_demarrage(demarrage), m_arret(arret) {
-    cout << "Appel au constructeur paramétré de Purificateur" << endl;
+    //cout << "Appel au constructeur paramétré de Purificateur" << endl;
 }
 
 //getters
@@ -57,5 +57,5 @@ Purificateur &Purificateur::operator=(Purificateur PurificateurParam){
 
 //destructeur
 Purificateur::~Purificateur() {
-    cout << "Appel au destructeur de Purificateur" << endl;
+    //cout << "Appel au destructeur de Purificateur" << endl;
 }

@@ -68,6 +68,8 @@ public:
     //
     void lireMesures(string idCapteur);
 
+    void InitCapteurs();
+
     unordered_map<string, Capteur> getMCapteurs();
 
     unordered_map<string, Fournisseur> getMFournisseurs();

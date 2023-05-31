@@ -28,8 +28,8 @@ class Appareil {
         void setId(const string s);
 
         //services
-        double calculDistance(const Appareil &a) const;
-        double calculDistance(const Coordonnee pos) const;
+        double calculDistance(Appareil &a) const;
+        double calculDistance(Coordonnee pos) const;
 
     protected:
         Coordonnee m_position;

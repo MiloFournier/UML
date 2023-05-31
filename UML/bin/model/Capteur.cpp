@@ -9,13 +9,13 @@ using namespace std;
 //constructeur par défaut
 Capteur::Capteur()
     : Appareil(), estFonctionnel(true) {
-    cout << "Appel au constructeur par défaut de Capteur" << endl;
+    //cout << "Appel au constructeur par défaut de Capteur" << endl;
 }
 
 //constructeur paramétré
 Capteur::Capteur(Coordonnee c, string id, bool b)
     : Appareil(c, id), estFonctionnel(b) {
-    cout << "Appel au constructeur paramétré de Capteur" << endl;
+    //cout << "Appel au constructeur paramétré de Capteur" << endl;
 }
 
 //getters
