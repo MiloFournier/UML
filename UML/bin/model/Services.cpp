@@ -45,9 +45,11 @@
                             cout << "    i.second.getValeur(): " << i.second.getValeur() << endl;
                             cout << "    j.second.getValeur(): " << j.second.getValeur() << endl;
                             cout << "    abs(i.second.getValeur() - j.second.getValeur()): " << abs(i.second.getValeur() - j.second.getValeur()) << endl;
-                            if(abs(i.second.getValeur() - j.second.getValeur()) > limiteDeMesure) {
+                            cout << "    limiteDeMesure " << limiteDeMesure << endl;
+                            if(abs(i.second.getValeur() - j.second.getValeur()) >= limiteDeMesure) {
                                 cout << "    vérification de la limite de valeur: ok" << endl;
                                 compteurErreurs++;
+                                //cout << "    compteurErreurs " << compteurErreurs << endl;
                             }
                         }
                     }
@@ -90,18 +92,24 @@
                     }
                     compteur += 4; // Ajouter le nombre de mesures comparées (4 gaz)
                 }*/
+                compteur += 4;
             }
-            compteur += 4;
         }
         double tauxErreur = 0; 
-        if (compteur){
-            tauxErreur = (compteurErreurs / compteur) * 100.0;
+        cout << "    compteurErreurs " << compteurErreurs << endl;
+        cout << "    compteur " << compteur << endl;
+        if (compteur>0){
+            // Le cast est obligatoire sinon le résultat de la division est 0
+            tauxErreur = (static_cast<double>(compteurErreurs) / compteur) * 100.0;
         }
+        cout << "    tauxErreur " << tauxErreur << endl;
         bool dysfonctionnel = false;
 
         if (tauxErreur > 70.0) {
             dysfonctionnel = true;
         }
+
+        cout << "   dysfonctionnel " << dysfonctionnel << endl; 
 
         return dysfonctionnel;
     }
