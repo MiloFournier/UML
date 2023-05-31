@@ -12,7 +12,7 @@
 
    
 
-    bool Services::verifierEtatCapteur(Capteur capteurParam, Database &data) {
+    bool Services::verifierEtatCapteur(Capteur &capteurParam, Database &data) {
         double distanceDeVerification = 200.0; // en km
         double limiteDeMesure = 5.0; // valeur limite de différence entre les mesures
         int compteurErreurs = 0;
@@ -107,6 +107,12 @@
 
         if (tauxErreur > 70.0) {
             dysfonctionnel = true;
+        }
+
+        if (dysfonctionnel){
+            capteurParam.setEstFonctionnel(false); 
+        } else {
+            capteurParam.setEstFonctionnel(true); 
         }
 
         cout << "   dysfonctionnel " << dysfonctionnel << endl; 

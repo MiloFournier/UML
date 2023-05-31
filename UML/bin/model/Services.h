@@ -19,7 +19,7 @@ class Services {
         virtual ~Services();
 
         //services
-        bool verifierEtatCapteur(Capteur capteurParam, Database &data);
+        bool verifierEtatCapteur(Capteur &capteurParam, Database &data);
         //double quantifierImpactPurificateur(Purificateur purificateurParam);
 };
 

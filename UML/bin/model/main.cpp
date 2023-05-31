@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 
     // Erreur ici
     bool b = s->verifierEtatCapteur(c, *data);
-    cout << "vérification de l'état du capteur: ok" << endl;
+    cout << "vérification de l'état du capteur EstFonctinnel :"  << c.getEstFonctionnel() << endl;
 
     cout << "L'état du capteur est: " << b << endl;
 
