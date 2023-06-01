@@ -24,8 +24,8 @@
             cout << "   distance aux autres capteurs: " << endl;
         for (const auto& capteurTest : listeDesCapteurs) {
         // Vérification de la distance entre capteurParam et capteurTest
-            cout << "           " << capteurTest.second.calculDistance(capteurParam); //<< endl;
-            if (capteurTest.second.calculDistance(capteurParam) < distanceDeVerification && capteurTest.second.calculDistance(capteurParam) != 0) {
+            cout << "           " << capteurTest.second.getId() << ": " << capteurTest.second.calculDistance(capteurParam); //<< endl;
+            if (capteurTest.second.calculDistance(capteurParam) < distanceDeVerification && capteurTest.second.calculDistance(capteurParam) != 0.0) {
                 cout << " (distance: ok)";
                 // Vérification de la date des mesures
                 for(const auto &i : capteurParam.getLMesures_O3()) {
