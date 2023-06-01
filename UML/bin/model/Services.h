@@ -1,14 +1,10 @@
-//
-// Created by Milo Fournier on 5/14/23.
-//
-
 #ifndef GL_ET_UML_SERVICES_H
 #define GL_ET_UML_SERVICES_H
 
 #include "Capteur.h"
 #include "Database.h"
 #include "Purificateur.h"
-    #include <stdbool.h>
+#include <stdbool.h>
 
 using namespace std;
 

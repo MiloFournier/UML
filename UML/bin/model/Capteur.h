@@ -1,7 +1,3 @@
-//
-// Created by Milo Fournier on 5/10/23.
-//
-
 #ifndef GL_ET_UML_CAPTEUR_H
 #define GL_ET_UML_CAPTEUR_H
 

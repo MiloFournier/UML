@@ -1,7 +1,3 @@
-//
-// Created by Milo Fournier on 5/10/23.
-//
-
 #include "Appareil.h"
 #include <iostream>
 #include <cmath>

@@ -1,7 +1,3 @@
-//
-// Created by Milo Fournier on 5/14/23.
-//
-
 #include "Capteur.h"
 #include "Database.h"
 

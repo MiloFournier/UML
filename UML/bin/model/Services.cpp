@@ -1,6 +1,3 @@
-//
-// Created by Milo Fournier on 5/14/23.
-//
     #include "Services.h"
     #include <cmath>
 
