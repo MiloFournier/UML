@@ -44,7 +44,6 @@ int main(int argc, char** argv) {
     Services *s = new Services();
     //cout << "création des services: ok" << endl;
     unordered_map<string, Capteur> capt = data->getMCapteurs();
-    //cout << "taille de capt: " << capt.size() << endl;
     //cout << "création de l'unordered_map des capteurs: ok" << endl;
     string sensorSearch;
     cout << "Entrez l'Identifiant d'un Capteur pour vérifier s'il est Fonctionnel: ";
@@ -56,45 +55,38 @@ int main(int argc, char** argv) {
          return 0;
      }
     Capteur c = it->second;
-    //cout << "recherche de it->second: ok" << endl;
     cout << "Capteur ID: " << c.getId() << endl;
 
-    // Erreur ici
     bool avant = c.getEstFonctionnel();
     if(avant == 1)
         cout << "Le capteur est initialement considéré comme: Fonctionnel" << endl;
     else
         cout << "Le capteur est initialement considéré comme: Dysfonctionnel" << endl;
-    bool b = s->verifierEtatCapteur(c, *data);
-
-    //cout << "b: " << b << endl;
-    //cout << "getEstFonctionnel: " << c.getEstFonctionnel() << endl;
+    bool b = s->verifierEtatCapteur(c, *data, true);
 
     if(b == 0 && avant == 1)
-        cout << "Le capteur est encore considéré comme: Fonctionnel" << endl;
+        cout << "Le capteur est encore considéré comme: Fonctionnel\n\n" << endl;
     else if(b == 0 && avant == 0)
-        cout << "Le capteur est désormais considéré comme: Fonctionnel" << endl;
+        cout << "Le capteur est désormais considéré comme: Fonctionnel\n\n" << endl;
     else if(b == 1 && avant == 0)
-        cout << "Le capteur est encore considéré comme: Dysfonctionnel" << endl;
+        cout << "Le capteur est encore considéré comme: Dysfonctionnel\n\n" << endl;
     else if(b == 1 && avant == 1)
-        cout << "Le capteur est désormais considéré comme: Dysfonctionnel" << endl;
-    //cout << "Le capteur est: " << b << endl;
+        cout << "Le capteur est désormais considéré comme: Dysfonctionnel\n\n" << endl;
 
-    // Affichage des fournisseurs
-    // unordered_map<string, Particulier> parti = data->getMParticuliers();
-    // cout << "Voici la liste des Particuliers" << endl; 
-    // for (unordered_map<string, Particulier>::iterator it = parti.begin(); it != parti.end(); ++it){
-    //     cout << "hello" << endl;
-    //     const string& particulierId = it->first;
-    //     const Particulier& particulier = it->second;
-    //     cout << "ID_particulier: " << particulierId << endl;
-    //     list<Capteur>::iterator cap = it->second.getListeCapteurs().begin();
-    //     cout << "Capteur qui nous interesse" << cap->getEstFonctionnel();
-    //     //cout << "it->second : " << particulier;
-        
-    // }
-    
-    // Autres informations du fournisseur si nécessaire
+
+
+    unordered_map<string, Capteur> listeDesCapteurs = data->getMCapteurs();
+    //for(unordered_map<string, Capteur>::iterator cap = data->getMCapteurs().begin(); cap != data->getMCapteurs().end(); cap++){
+    for(const auto& capteurBoucle : listeDesCapteurs) {
+        cout << "Capteur: " <<capteurBoucle.first << endl;
+    }
+
+    Coordonnee coo = Coordonnee(44.0, -1.0);
+    string date = "2019-01-01 12:00:00";
+
+    // Affichage lié à obtenirQualiteAirPosition
+    double *res = s->obtenirQualiteAirPosition(data, coo, date);
+    cout << "Mesure O3: " << res[0] << endl;
 
     return 0;
 }

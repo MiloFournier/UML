@@ -15,7 +15,9 @@ class Services {
         virtual ~Services();
 
         //services
-        bool verifierEtatCapteur(Capteur &capteurParam, Database &data);
+        bool verifierEtatCapteur(Capteur &capteurParam, Database &data, bool affichage);
+
+        double * obtenirQualiteAirPosition(Database* d, Coordonnee coordonneeParam, string dateParam);
         //double quantifierImpactPurificateur(Purificateur purificateurParam);
 };
 
