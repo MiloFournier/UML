@@ -9,7 +9,7 @@
 
     bool Services::verifierEtatCapteur(Capteur &capteurParam, Database &data, bool affichage) {
         double distanceDeVerification = 200.0; // en km
-        double limiteDeMesure = 20.0; // valeur limite de différence entre les mesures
+        double limiteDeMesure = 5.0; // valeur limite de différence entre les mesures
         int compteurErreurs = 0;
         int compteur = 0;
         unordered_map<string, Capteur> listeDesCapteurs = data.getMCapteurs();
@@ -32,6 +32,7 @@
                             if(abs(i.second.getValeur() - j.second.getValeur()) >= limiteDeMesure) {
                                 compteurErreurs++;
                             }
+                            compteur++;
                         }
                     }
                 }
@@ -41,6 +42,7 @@
                             if(abs(i.second.getValeur() - j.second.getValeur()) > limiteDeMesure) {
                                 compteurErreurs++;
                             }
+                            compteur++;
                         }
                     }
                 }
@@ -50,6 +52,7 @@
                             if(abs(i.second.getValeur() - j.second.getValeur()) > limiteDeMesure) {
                                 compteurErreurs++;
                             }
+                            compteur++;
                         }
                     }
                 }
@@ -59,10 +62,11 @@
                             if(abs(i.second.getValeur() - j.second.getValeur()) > limiteDeMesure) {
                                 compteurErreurs++;
                             }
+                            compteur++;
                         }
                     }
                 }
-                compteur += 4;
+                //compteur += 4;
             }
             if(affichage)
                 cout << endl;
@@ -73,6 +77,11 @@
             tauxErreur = (static_cast<double>(compteurErreurs) / compteur) * 100.0;
         }
         bool dysfonctionnel = false;
+        if(affichage) {
+            cout << "compteurErreurs: " << compteurErreurs << endl;
+            cout << "compteur: " << compteur << endl;
+            cout << "tauxErreur: " << tauxErreur << endl;
+        }
         if (tauxErreur > 70.0) {
             dysfonctionnel = true;
         }
