@@ -84,9 +84,24 @@ int main(int argc, char** argv) {
     /*for(const auto& capteurBoucle : listeDesCapteurs) {
         cout << "Capteur: " <<capteurBoucle.first << endl;
     }*/
+    cout << "Entrez entrer la latitude du point géogrpahique souhaité: ";
+    double lat; 
+    cin >> lat; 
+    cout << endl; 
+    cout << "Entrez entrer la longitude du point géogrpahique souhaité: ";
+    double lon; 
+    cin >> lon; 
+    // Cordonées d'un capteur du fichier : Coordonnee(44.0, 2);
+    Coordonnee coo = Coordonnee(lat, lon);
+    cout << endl; 
+    cout << "Entrez la date à laquelle vous souhaitez obtenir la qualité de l'air sous le format dd/MM/yyyy HH:mm : ";
+    string date ; 
+    cin >> date; 
+    string heure; 
+    cin >> heure; 
 
-    Coordonnee coo = Coordonnee(44.0, -1);
-    string date = "2019-04-01 12:00:00";
+    date =  date + " " + heure; 
+    //string date = "01/01/2019 12:00";
 
     // Affichage lié à obtenirQualiteAirPosition
 
@@ -96,10 +111,14 @@ int main(int argc, char** argv) {
     ms_double = t2 - t1;
     cout << "*** obtenirQualiteAirPosition()'s CPU time = "<< ms_double.count()/1000.0 << " s ***" << endl;
 
-    cout << "Mesure O3: " << res[0] << endl;
-    cout << "Mesure NO2: " << res[1] << endl;
-    cout << "Mesure SO2: " << res[2] << endl;
-    cout << "Mesure PM10: " << res[3] << endl;
+    cout << endl; 
+    cout << "Voici les concentrations des gazs le " << date << ":" << endl; 
+    cout << endl; 
+    cout << "Mesure O3: " << res[0] << " μg/m3" << endl;
+    cout << "Mesure NO2: " << res[1] << " μg/m3" << endl;
+    cout << "Mesure SO2: " << res[2] << " μg/m3" << endl;
+    cout << "Mesure PM10: " << res[3] << " μg/m3" << endl;
+    cout << endl; 
 
     return 0;
 }
