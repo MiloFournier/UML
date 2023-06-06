@@ -18,7 +18,6 @@ class Services {
         bool verifierEtatCapteur(Capteur &capteurParam, Database &data, bool affichage);
 
         double * obtenirQualiteAirPosition(Database &d, Coordonnee coordonneeParam, string dateParam);
-        //double quantifierImpactPurificateur(Purificateur purificateurParam);
 };
 
 #endif //GL_ET_UML_SERVICES_H

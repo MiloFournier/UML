@@ -8,7 +8,10 @@
 #include "Services.h"
 
 using namespace std;
-
+using std::chrono::high_resolution_clock;
+using std::chrono::duration_cast;
+using std::chrono::duration;
+using std::chrono::milliseconds;
 /**
  * @file main.cpp
  * 
@@ -56,13 +59,17 @@ int main(int argc, char** argv) {
      }
     Capteur c = it->second;
     cout << "Capteur ID: " << c.getId() << endl;
-
     bool avant = c.getEstFonctionnel();
     if(avant == 1)
         cout << "Le capteur est initialement considéré comme: Fonctionnel" << endl;
     else
         cout << "Le capteur est initialement considéré comme: Dysfonctionnel" << endl;
-    bool b = s->verifierEtatCapteur(c, *data, 0);
+
+    auto t1 = high_resolution_clock::now();
+    bool b = s->verifierEtatCapteur(c, *data, 1);
+    auto t2 = high_resolution_clock::now();
+    duration<double, milli> ms_double = t2 - t1;
+    cout << "*** verifierEtatCapteur()'s CPU time = "<< ms_double.count()/1000.0 << " s ***" << endl;
 
     if(b == 0 && avant == 1)
         cout << "Le capteur est encore considéré comme: Fonctionnel\n\n" << endl;
@@ -73,27 +80,26 @@ int main(int argc, char** argv) {
     else if(b == 1 && avant == 1)
         cout << "Le capteur est désormais considéré comme: Dysfonctionnel\n\n" << endl;
 
-
-
     unordered_map<string, Capteur> listeDesCapteurs = data->getMCapteurs();
-    //for(unordered_map<string, Capteur>::iterator cap = data->getMCapteurs().begin(); cap != data->getMCapteurs().end(); cap++){
-    for(const auto& capteurBoucle : listeDesCapteurs) {
+    /*for(const auto& capteurBoucle : listeDesCapteurs) {
         cout << "Capteur: " <<capteurBoucle.first << endl;
-    }
+    }*/
 
-    Coordonnee coo = Coordonnee(44.0, 2.0);
-    string date = "01/01/2019 12:00";
+    Coordonnee coo = Coordonnee(44.0, -1);
+    string date = "2019-04-01 12:00:00";
 
     // Affichage lié à obtenirQualiteAirPosition
+
+    t1 = high_resolution_clock::now();
     double *res = s->obtenirQualiteAirPosition(*data, coo, date);
+    t2 = high_resolution_clock::now();
+    ms_double = t2 - t1;
+    cout << "*** obtenirQualiteAirPosition()'s CPU time = "<< ms_double.count()/1000.0 << " s ***" << endl;
+
     cout << "Mesure O3: " << res[0] << endl;
-    cout << "Mesure : " << res[0] << endl;
-    cout << "Mesure O3: " << res[0] << endl;
-    cout << "Mesure O3: " << res[0] << endl;
+    cout << "Mesure NO2: " << res[1] << endl;
+    cout << "Mesure SO2: " << res[2] << endl;
+    cout << "Mesure PM10: " << res[3] << endl;
 
     return 0;
 }
-
-
-
-
