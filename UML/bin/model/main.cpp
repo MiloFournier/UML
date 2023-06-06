@@ -59,7 +59,12 @@ int main(int argc, char** argv) {
      }
     Capteur c = it->second;
     cout << "Capteur ID: " << c.getId() << endl;
+
+    //test 06
+    //c.setEstFonctionnel(0);
+
     bool avant = c.getEstFonctionnel();
+    cout << "avant: " << avant << endl;
     if(avant == 1)
         cout << "Le capteur est initialement considéré comme: Fonctionnel" << endl;
     else
@@ -80,15 +85,15 @@ int main(int argc, char** argv) {
     else if(b == 1 && avant == 1)
         cout << "Le capteur est désormais considéré comme: Dysfonctionnel\n\n" << endl;
 
-    unordered_map<string, Capteur> listeDesCapteurs = data->getMCapteurs();
+    //unordered_map<string, Capteur> listeDesCapteurs = data->getMCapteurs();
     /*for(const auto& capteurBoucle : listeDesCapteurs) {
         cout << "Capteur: " <<capteurBoucle.first << endl;
     }*/
-    cout << "Entrez entrer la latitude du point géogrpahique souhaité: ";
+    cout << "Entrez entrer la latitude du point géographique souhaité: ";
     double lat; 
     cin >> lat; 
     cout << endl; 
-    cout << "Entrez entrer la longitude du point géogrpahique souhaité: ";
+    cout << "Entrez entrer la longitude du point géographique souhaité: ";
     double lon; 
     cin >> lon; 
     // Cordonées d'un capteur du fichier : Coordonnee(44.0, 2);

@@ -13,7 +13,7 @@
         int compteurErreurs = 0;
         int compteur = 0;
         unordered_map<string, Capteur> listeDesCapteurs = data.getMCapteurs();
-        const auto& it = listeDesCapteurs.begin();
+        const auto& it = listeDesCapteurs.begin(); //pas utilisé ?
         if(listeDesCapteurs.size() != 0)
             if(affichage)
                 cout << "   distance aux autres capteurs: " << endl;

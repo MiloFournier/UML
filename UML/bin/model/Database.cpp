@@ -20,6 +20,56 @@
     //----------------------------------------------------------------- PUBLIC
 
     //----------------------------------------------------- Méthodes publiques
+
+
+    //fichiers
+    //
+    /*
+    // 1 seul capteur
+    string prov = "../../tables/providers.csv";
+    string clean = "../../tables/cleaners.csv";
+    string part = "../../tables/jeuVide.csv";
+    string meas = "../../tables/measurements01.csv";
+    string sens = "../../tables/sensors01.csv";
+    */
+    
+    /*
+    // 0 capteur
+    string prov = "../../tables/providers.csv";
+    string clean = "../../tables/cleaners.csv";
+    string part = "../../tables/jeuVide.csv";
+    string meas = "../../tables/measurements02.csv";
+    string sens = "../../tables/sensors02.csv";
+    */
+
+    // 3 capteurs avec les mêmes mesures et distance ok
+    /*
+    string prov = "../../tables/providers.csv";
+    string clean = "../../tables/cleaners.csv";
+    string part = "../../tables/jeuVide.csv";
+    string meas = "../../tables/measurements03.csv";
+    string sens = "../../tables/sensors03.csv";
+    */
+
+    // 3 capteurs avec les mêmes mesures mais distance PAS OK
+    /*
+    string prov = "../../tables/providers.csv";
+    string clean = "../../tables/cleaners.csv";
+    string part = "../../tables/jeuVide.csv";
+    string meas = "../../tables/measurements04.csv";
+    string sens = "../../tables/sensors04.csv";
+    */
+
+    // 3 capteurs, Sensor0 = fonctionnel mais Sensor1 = dysfonctionnel
+    // car mesures de Sensor1 = [1000, 1000, 1000, 1000]
+    string prov = "../../tables/providers.csv";
+    string clean = "../../tables/cleaners.csv";
+    string part = "../../tables/jeuVide.csv";
+    string meas = "../../tables/measurements05.csv";
+    string sens = "../../tables/sensors05.csv";
+
+    //test06 il suffit de décommenter la ligne 64 du main: on passe de dysfonctionnel à fonctionnel
+
     bool Database::FinFichier(ifstream& fic)
     {
         return fic.eof();
@@ -28,7 +78,7 @@
 
     void Database::LireFournisseurs(){
         ifstream fic;
-        fic.open("../../tables/providers.csv");
+        fic.open(prov);
 
         //cout << "Je suis la (LireFournisseurs) !" << endl;
         /*recuperer les informations depuis le fichier*/
@@ -89,7 +139,7 @@
 
     Purificateur Database::LirePurificateurs (string id){
         ifstream fic; 
-        fic.open("../../tables/cleaners.csv");
+        fic.open(clean);
         string lat;
         string lon;
         string deb;
@@ -137,7 +187,7 @@
 
     void Database::LireParticuliers(){
         ifstream fic;
-        fic.open("../../tables/jeuVide.csv");
+        fic.open(part);
 
         /*recuperer les informations depuis le fichier*/
         while(FinFichier(fic) == false){
@@ -183,7 +233,7 @@
     void Database::lireMesures(string idCapteur) {
 
         ifstream fic;
-        fic.open("../../tables/mesuresVide.csv");
+        fic.open(meas);
 
         string date;
         string test;
@@ -226,7 +276,7 @@
     Capteur Database::LireCapteurs (string id){
         //cout << "je suis dans LireCapteurs" << endl;
         ifstream fic; 
-        fic.open("../../tables/jeuData.csv");
+        fic.open(sens);
         string lat;
         string lon;
 
@@ -275,7 +325,7 @@
 
     void Database::InitCapteurs() {
         ifstream fic; 
-        fic.open("../../tables/jeuData.csv");
+        fic.open(sens);
         string lat;
         string lon;
         string test;
