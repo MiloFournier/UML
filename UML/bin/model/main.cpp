@@ -62,7 +62,7 @@ int main(int argc, char** argv) {
         cout << "Le capteur est initialement considéré comme: Fonctionnel" << endl;
     else
         cout << "Le capteur est initialement considéré comme: Dysfonctionnel" << endl;
-    bool b = s->verifierEtatCapteur(c, *data, true);
+    bool b = s->verifierEtatCapteur(c, *data, 0);
 
     if(b == 0 && avant == 1)
         cout << "Le capteur est encore considéré comme: Fonctionnel\n\n" << endl;
@@ -81,11 +81,14 @@ int main(int argc, char** argv) {
         cout << "Capteur: " <<capteurBoucle.first << endl;
     }
 
-    Coordonnee coo = Coordonnee(44.0, -1.0);
-    string date = "2019-01-01 12:00:00";
+    Coordonnee coo = Coordonnee(44.0, 2.0);
+    string date = "01/01/2019 12:00";
 
     // Affichage lié à obtenirQualiteAirPosition
-    double *res = s->obtenirQualiteAirPosition(data, coo, date);
+    double *res = s->obtenirQualiteAirPosition(*data, coo, date);
+    cout << "Mesure O3: " << res[0] << endl;
+    cout << "Mesure : " << res[0] << endl;
+    cout << "Mesure O3: " << res[0] << endl;
     cout << "Mesure O3: " << res[0] << endl;
 
     return 0;

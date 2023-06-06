@@ -199,12 +199,13 @@
             if (test == idCapteur) {
                 getline(fic, type, ';');
                 getline(fic, mesure, ';');
-                getline(fic, test); 
+                getline(fic, test);
                 //cout << "lecture" << endl;
                 unordered_map<string, Capteur>::iterator it = m_capteurs.find(idCapteur);
                 
                 Mesure m = Mesure(date, mesure, type);
 
+                
                 if (type == "O3") {
                     it->second.setLMesures_O3(date, m);
                 } else if (type == "SO2") {
@@ -214,6 +215,8 @@
                 } else if (type == "PM10") {
                     it->second.setLMesures_PM10(date, m);
                 }
+            }else{
+                 getline(fic, test);
             }
         }
         fic.close();
