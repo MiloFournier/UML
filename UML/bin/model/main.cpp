@@ -12,21 +12,28 @@ using std::chrono::milliseconds;
 
 int main(int argc, char** argv) {
     Database *data = new Database();
+
     bool bInit = data->InitCapteurs();
+
     if(!bInit) {
         cerr << "Erreur, il n'y a aucun capteur dans le fichier." << endl;
         return -1;
     } else {
         Services *s = new Services();
+
         unordered_map <string, Capteur> capt = data->getMCapteurs();
+
         string sensorSearch;
         cout << "Entrez l'Identifiant d'un Capteur pour vérifier s'il est Fonctionnel: ";
         cin >> sensorSearch;
+
         unordered_map<string, Capteur>::iterator it = capt.find(sensorSearch);
+
         if (it == capt.end()) {
             cout << "erreur: le sensor n'est pas trouvé" << endl;
             return 0;
         }
+
         Capteur c = it->second;
         cout << "Capteur ID: " << c.getId() << endl;
 
@@ -40,7 +47,10 @@ int main(int argc, char** argv) {
             cout << "Le capteur est initialement considéré comme: Dysfonctionnel" << endl;
 
         auto t1 = high_resolution_clock::now();
+
+        //appel au service verifierEtatCapteur
         bool b = s->verifierEtatCapteur(c, *data, 1);
+
         auto t2 = high_resolution_clock::now();
         duration<double, milli> ms_double = t2 - t1;
         cout << endl;
@@ -73,7 +83,10 @@ int main(int argc, char** argv) {
         date = date + " " + heure;
 
         t1 = high_resolution_clock::now();
+
+        //appel au service verifierEtatCapteur
         double *res = s->obtenirQualiteAirPosition(*data, coo, date);
+
         t2 = high_resolution_clock::now();
         ms_double = t2 - t1;
         cout << "*** obtenirQualiteAirPosition()'s CPU time = " << ms_double.count() / 1000.0 << " s ***" << endl;
