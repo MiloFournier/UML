@@ -33,10 +33,6 @@ class Capteur : public Appareil{
         //surcharge de =
         Capteur &operator=(Capteur CapteurParam);
 
-        //services
-        //double calculDistance(Appareil a);
-        //double calculDistance(Coordonnee pos);
-
     protected:
         bool estFonctionnel;
         unordered_map<string, Mesure> lmesures_O3;
@@ -44,6 +40,4 @@ class Capteur : public Appareil{
         unordered_map<string, Mesure> lmesures_SO2;
         unordered_map<string, Mesure> lmesures_PM10;
 };
-
-
-#endif //GL_ET_UML_CAPTEUR_H
+#endif

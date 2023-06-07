@@ -34,5 +34,4 @@ class Purificateur : public Appareil{
         string m_arret;
 };
 
-
-#endif //GL_ET_UML_PURIFICATEUR_H
+#endif

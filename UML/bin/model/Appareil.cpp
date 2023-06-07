@@ -7,13 +7,11 @@ using namespace std;
 //constructeur par défaut
 Appareil::Appareil()
     : m_position(0, 0), m_id("") {
-    //cout << "Appel au constructeur par défaut d'Appareil" << endl;
 };
 
 //constructeur paramétré
 Appareil::Appareil(Coordonnee c, string s)
     : m_position(c), m_id(s) {
-    //cout << "Appel au constructeur paramétré d'Appareil" << endl;
 }
 
 //getters
@@ -52,6 +50,4 @@ double Appareil::calculDistance(Coordonnee pos) const{
 }
 
 //destructeur
-Appareil::~Appareil() {
-    //cout << "Appel au destructeur d'Appareil" << endl;
-}
+Appareil::~Appareil() {}

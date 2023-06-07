@@ -1,10 +1,4 @@
 #include "Acteur.h"
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <vector>
-#include <utility>
-#include <fstream>
 
 // Constructeur par défaut
 Acteur::Acteur() : m_id("") {}

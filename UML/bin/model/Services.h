@@ -19,5 +19,4 @@ class Services {
 
         double * obtenirQualiteAirPosition(Database &d, Coordonnee coordonneeParam, string dateParam);
 };
-
-#endif //GL_ET_UML_SERVICES_H
+#endif

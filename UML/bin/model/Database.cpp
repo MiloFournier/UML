@@ -1,29 +1,7 @@
-    /*************************************************************************
-                             Flux -  description
-                                -------------------
-        début                : 10/05/23
-        copyright            : B3122 B3126
-    *************************************************************************/
-
-    //---------- Réalisation de la classe <LireFichier> (fichier LireFichier.cpp) ------------
-
-    //---------------------------------------------------------------- INCLUDE
-
-    //-------------------------------------------------------- Include système
-
-    //------------------------------------------------------ Include personnel
     #include "Database.h"
-    #include <string>
-
-    //------------------------------------------------------------- Constantes
-
-    //----------------------------------------------------------------- PUBLIC
-
-    //----------------------------------------------------- Méthodes publiques
-
 
     //fichiers
-    //
+
     /*
     // 1 seul capteur
     string prov = "../../tables/providers.csv";
@@ -32,9 +10,9 @@
     string meas = "../../tables/measurements01.csv";
     string sens = "../../tables/sensors01.csv";
     */
-    
-    /*
+
     // 0 capteur
+    /*
     string prov = "../../tables/providers.csv";
     string clean = "../../tables/cleaners.csv";
     string part = "../../tables/jeuVide.csv";
@@ -47,7 +25,7 @@
     string prov = "../../tables/providers.csv";
     string clean = "../../tables/cleaners.csv";
     string part = "../../tables/jeuVide.csv";
-    string meas = "../../tables/measurements03.csv";
+    string meas = "../../tables/measurements04.csv";
     string sens = "../../tables/sensors03.csv";
     */
 
@@ -59,6 +37,7 @@
     string meas = "../../tables/measurements04.csv";
     string sens = "../../tables/sensors04.csv";
     */
+
 
     // 3 capteurs, Sensor0 = fonctionnel mais Sensor1 = dysfonctionnel
     // car mesures de Sensor1 = [1000, 1000, 1000, 1000]
@@ -75,12 +54,10 @@
         return fic.eof();
     }
 
-
     void Database::LireFournisseurs(){
         ifstream fic;
         fic.open(prov);
 
-        //cout << "Je suis la (LireFournisseurs) !" << endl;
         /*recuperer les informations depuis le fichier*/
         while (FinFichier(fic) == false){ 
             string recupProvider = "null";
@@ -98,10 +75,9 @@
             if (it == m_fournisseurs.end())
             {
                 //alors la liste de cleaner de ce fournisseur n'a pas encore ete cree
-                
                 list<Purificateur> m_listePurificateurs = {puri};
                 Fournisseur four = Fournisseur(recupProvider, m_listePurificateurs);
-                m_fournisseurs.insert({recupProvider, four}); // Ajout de cette ligne
+                m_fournisseurs.insert({recupProvider, four});
 
                 //si le fournisseur existe deja, alors on rajoute ce purificateur a sa liste deja existante
             }
@@ -113,12 +89,10 @@
             }
         }
 
-
         unordered_map<string, Fournisseur>::iterator itera = m_fournisseurs.begin();
         m_fournisseurs.erase(itera);
 
         for (unordered_map<string, Fournisseur>::iterator it = m_fournisseurs.begin(); it != m_fournisseurs.end(); it++){
-            
             list<Purificateur> listPuri = it->second.getListePurificateurs();
             for(list<Purificateur>::iterator iList = listPuri.begin(); iList != listPuri.end(); iList++){
                 Purificateur puri = LirePurificateurs(iList->getId());
@@ -127,15 +101,9 @@
                 iList->setCoordonnee(puri.getCoordonnee());
             }
             it->second.setListePurificateurs(listPuri);
-            
         }
-    
-   
-        //cout << "J'ai terminé avec LireFournisseurs' !" << endl;
         fic.close();
     }
-
-        //----- Fin de LireFournisseur
 
     Purificateur Database::LirePurificateurs (string id){
         ifstream fic; 
@@ -147,8 +115,6 @@
 
         /*recherche dans le fichier des informations de notre cleaner*/
         bool trouve = false;
-
-        //cout << "Je suis la (LirePurificateurs) !" << endl;
 
         while(trouve ==false && FinFichier(fic) == false){
             if(fic.eof()) break; 
@@ -170,20 +136,15 @@
                 getline(fic, test, ';');
             }
         }
-
         if(trouve == false){
             return Purificateur();
         }
 
-        
-
         Coordonnee cor = Coordonnee(lat, lon);
         Purificateur pur = Purificateur(cor, id, deb, fin);
-        //cout << "J'ai terminé avec LirePurificateurs !" << endl;
-
         fic.close();
         return pur;
-    }//----- Fin de LirePurificateur
+    }
 
     void Database::LireParticuliers(){
         ifstream fic;
@@ -197,8 +158,7 @@
             string test; 
             getline(fic, recupUser,';');
             getline(fic, recupSensor,';');
-            //cout << "recupSensor: " << recupSensor << endl;
-            getline(fic, test); 
+            getline(fic, test);
             
             Capteur cap = LireCapteurs(recupSensor);
 
@@ -221,147 +181,140 @@
                 li.push_back(cap);
                 it->second.setListeCapteurs(li);
             }
-            
         }
-
         unordered_map<string, Particulier>::iterator itera = m_particuliers.begin();
         m_particuliers.erase(itera);
-
         fic.close();
     }
 
     void Database::lireMesures(string idCapteur) {
-
         ifstream fic;
         fic.open(meas);
+        streampos posDebut = fic.tellg();
+        fic.seekg(0, ios::end);
+        streampos posFin = fic.tellg();
+        if (posFin == posDebut) {
+            return;
+        } else {
+            fic.seekg(0, ios::beg);
+            string date;
+            string test;
+            string type;
+            string mesure;
 
-        string date;
-        string test;
-        string type;
-        string mesure;
+            while (FinFichier(fic) == false) {
+                if (fic.eof()) break;
+                getline(fic, date, ';');
+                getline(fic, test, ';');
 
-        while(FinFichier(fic) == false) {
-            if(fic.eof()) break; 
-            getline(fic, date, ';');
-            getline(fic, test, ';');
+                // On a trouvé le capteur
+                if (test == idCapteur) {
+                    getline(fic, type, ';');
+                    getline(fic, mesure, ';');
+                    getline(fic, test);
+                    unordered_map<string, Capteur>::iterator it = m_capteurs.find(idCapteur);
 
-            // On a trouvé le capteur
-            if (test == idCapteur) {
-                getline(fic, type, ';');
-                getline(fic, mesure, ';');
-                getline(fic, test);
-                //cout << "lecture" << endl;
-                unordered_map<string, Capteur>::iterator it = m_capteurs.find(idCapteur);
-                
-                Mesure m = Mesure(date, mesure, type);
+                    Mesure m = Mesure(date, mesure, type);
 
-                
-                if (type == "O3") {
-                    it->second.setLMesures_O3(date, m);
-                } else if (type == "SO2") {
-                    it->second.setLMesures_SO2(date, m);
-                } else if (type == "NO2") {
-                    it->second.setLMesures_NO2(date, m);
-                } else if (type == "PM10") {
-                    it->second.setLMesures_PM10(date, m);
+                    if (type == "O3") {
+                        it->second.setLMesures_O3(date, m);
+                    } else if (type == "SO2") {
+                        it->second.setLMesures_SO2(date, m);
+                    } else if (type == "NO2") {
+                        it->second.setLMesures_NO2(date, m);
+                    } else if (type == "PM10") {
+                        it->second.setLMesures_PM10(date, m);
+                    }
+                } else {
+                    getline(fic, test);
                 }
-            }else{
-                 getline(fic, test);
             }
         }
         fic.close();
 }
 
-
     Capteur Database::LireCapteurs (string id){
-        //cout << "je suis dans LireCapteurs" << endl;
-        ifstream fic; 
+        ifstream fic;
         fic.open(sens);
-        string lat;
-        string lon;
+        streampos posDebut = fic.tellg();
+        fic.seekg(0, ios::end);
+        streampos posFin = fic.tellg();
+        Capteur cap;
+        if (posFin == posDebut) {
+            return cap;
+        } else {
+            fic.seekg(0, ios::beg);
+            string lat;
+            string lon;
 
-        //cout << "open fichiers ok" << endl;
+            /*recherche dans le fichier des informations de notre cleaner*/
+            bool trouve = false;
 
-        /*recherche dans le fichier des informations de notre cleaner*/
-        bool trouve = false;
-
-        while(trouve == false && FinFichier(fic) == false){
-            if(fic.eof()) break; 
-            string test;
-            getline(fic, test, ';');
-            //cout << "test: " << test << endl;
-            //cout << "id: " << id << endl;
-            /*si on a trouve le bon cleaner on cree l'objet*/
-            if(test == id){
-                //cout << "test == id" << endl;
-                getline(fic, lat, ';');
-                getline(fic, lon, ';');
-                getline(fic, test); 
-                trouve = true;
-
-            /*sinon on passe au prochain purificateur*/
-            }else{
+            while (trouve == false && FinFichier(fic) == false) {
+                if (fic.eof()) break;
+                string test;
                 getline(fic, test, ';');
-                getline(fic, test, ';');
-                //getline(fic, test); 
+                /*si on a trouve le bon cleaner on cree l'objet*/
+                if (test == id) {
+                    getline(fic, lat, ';');
+                    getline(fic, lon, ';');
+                    getline(fic, test);
+                    trouve = true;
+
+                    /*sinon on passe au prochain purificateur*/
+                } else {
+                    getline(fic, test, ';');
+                    getline(fic, test, ';');
+                }
             }
-        }
+            if (trouve == false) {
+                return Capteur();
+            }
 
-        if(trouve == false){
-            return Capteur();
+            Coordonnee cor = Coordonnee(lat, lon);
+
+            Capteur cap = Capteur(cor, id, true);
+
+            /*ensuite on ajoute les mesures dans le capteur*/
+            lireMesures(id);
         }
         fic.close();
+        return cap;
+    }
 
-        Coordonnee cor = Coordonnee(lat, lon);
-
-        Capteur cap = Capteur(cor, id, true);
-
-        /*ensuite on ajoute les mesures dans le capteur*/
-        lireMesures(id);
-        
-        return cap; 
-        
-    }//----- Fin de LireCapteurs
-
-    void Database::InitCapteurs() {
-        ifstream fic; 
+    bool Database::InitCapteurs() {
+        ifstream fic;
         fic.open(sens);
-        string lat;
-        string lon;
-        string test;
-        string saut;
-        int i = 0;
-        while(FinFichier(fic) == false){
-            if(fic.eof()) break; 
-            getline(fic, test, ';');
-            /*si on a trouve le bon cleaner on cree l'objet*/
+        streampos posDebut = fic.tellg();
+        fic.seekg(0, ios::end);
+        streampos posFin = fic.tellg();
+        if (posFin == posDebut) {
+            fic.close();
+            return false;
+        } else {
+            fic.seekg(0, ios::beg);
+            string lat;
+            string lon;
+            string test;
+            string saut;
+            int i = 0;
+            while (FinFichier(fic) == false) {
+                if (fic.eof()) break;
+                getline(fic, test, ';');
+                /*si on a trouve le bon cleaner on cree l'objet*/
                 getline(fic, lat, ';');
                 getline(fic, lon, ';');
                 getline(fic, saut);
-                //cout << lat << endl;
-                //cout << lon << endl;
-                //cout << test<< endl;
                 Coordonnee cor = Coordonnee(lat, lon);
-                //cout << "coord" << endl;
 
                 Capteur cap = Capteur(cor, test, true);
-                //cout << "capt" << endl;
                 m_capteurs.insert({test, cap});
                 lireMesures(test);
-                //cout << "lire" << endl;
                 i++;
+            }
+            fic.close();
+            return true;
         }
-
-        fic.close();
-
-        
-
-        /*ensuite on ajoute les mesures dans le capteur*/
-        
-
-
-        
-        
     }
 
     unordered_map<string, Capteur> Database::getMCapteurs(){
@@ -376,31 +329,10 @@
         return m_particuliers;
     }
 
-    //-------------------------------------------- Constructeurs - destructeur
-
     Database::Database ()
-    // Algorithme :
-    //
     {
         LireFournisseurs();
-        //LireParticuliers();
-    #ifdef MAP
-        cout << "Appel au constructeur de <Database>" << endl;
-    #endif
-    } //----- Fin de Flux
-
+    }
 
     Database::~Database( )
-    // Algorithme :
-    //
-    {
-    #ifdef MAP
-        cout << "Appel au destructeur de <Database>" << endl;
-    #endif
-    } //----- Fin de ~Flux
-
-
-    //------------------------------------------------------------------ PRIVE
-
-    //----------------------------------------------------- Méthodes protégées
-
+    {}

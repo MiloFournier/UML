@@ -5,14 +5,12 @@ using namespace std;
 
 //constructeur par défaut
 Purificateur::Purificateur()
-    : Appareil(), m_demarrage(""), m_arret("") { //test avec Kous pour Appareil() ou pas
-    //cout << "Appel au constructeur par défaut de Purificateur" << endl;
+    : Appareil(), m_demarrage(""), m_arret("") {
 }
 
 //constructeur paramétré
 Purificateur::Purificateur(Coordonnee c, string s, string demarrage, string arret)
     : Appareil(c, s), m_demarrage(demarrage), m_arret(arret) {
-    //cout << "Appel au constructeur paramétré de Purificateur" << endl;
 }
 
 //getters
@@ -45,13 +43,10 @@ void Purificateur::setCoordonnee(const Coordonnee s){
 
 //surcharge de =
 Purificateur &Purificateur::operator=(Purificateur PurificateurParam){
-    //Appareil::operator=(PurificateurParam);
     m_demarrage = PurificateurParam.getDemarrage();
     m_arret = PurificateurParam.getArret();
     return *this;
 }
 
 //destructeur
-Purificateur::~Purificateur() {
-    //cout << "Appel au destructeur de Purificateur" << endl;
-}
+Purificateur::~Purificateur() {}

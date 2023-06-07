@@ -33,4 +33,4 @@ class Appareil {
 };
 
 
-#endif //GL_ET_UML_APPAREIL_H
+#endif

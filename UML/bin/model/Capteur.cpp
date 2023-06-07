@@ -5,13 +5,11 @@ using namespace std;
 //constructeur par défaut
 Capteur::Capteur()
     : Appareil(), estFonctionnel(true) {
-    //cout << "Appel au constructeur par défaut de Capteur" << endl;
 }
 
 //constructeur paramétré
 Capteur::Capteur(Coordonnee c, string id, bool b)
     : Appareil(c, id), estFonctionnel(b) {
-    //cout << "Appel au constructeur paramétré de Capteur" << endl;
 }
 
 //getters
@@ -50,7 +48,6 @@ void Capteur::setLMesures_PM10(string d, Mesure m) {
 
 //surcharge de =
 Capteur &Capteur::operator=(Capteur CapteurParam){
-    //Appareil::operator=(CapteurParam); // est-ce qu'il me faut aussi une surcharge dans Appareil ?
     estFonctionnel = CapteurParam.getEstFonctionnel();
     lmesures_O3 = CapteurParam.getLMesures_O3();
     lmesures_NO2 = CapteurParam.getLMesures_NO2();
@@ -60,6 +57,4 @@ Capteur &Capteur::operator=(Capteur CapteurParam){
 }
 
 //destructeur
-Capteur::~Capteur() {
-    //cout << "Appel au destructeur de Capteur" << endl;
-}
+Capteur::~Capteur() {}

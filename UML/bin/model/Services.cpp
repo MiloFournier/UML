@@ -1,5 +1,4 @@
     #include "Services.h"
-    #include <cmath>
 
     using namespace std;
 
@@ -13,13 +12,12 @@
         int compteurErreurs = 0;
         int compteur = 0;
         unordered_map<string, Capteur> listeDesCapteurs = data.getMCapteurs();
-        const auto& it = listeDesCapteurs.begin(); //pas utilisé ?
         if(listeDesCapteurs.size() != 0)
             if(affichage)
                 cout << "   distance aux autres capteurs: " << endl;
         for (const auto& capteurTest : listeDesCapteurs) {
             if(affichage)
-                cout << "           " << capteurTest.second.getId() << ": " << capteurTest.second.calculDistance(capteurParam); //<< endl;
+                cout << "           " << capteurTest.second.getId() << ": " << capteurTest.second.calculDistance(capteurParam) << " km"; //<< endl;
             if (capteurTest.second.calculDistance(capteurParam) < distanceDeVerification && capteurTest.second.calculDistance(capteurParam) != 0.0) {
                 if(affichage)
                     cout << " (distance: ok)";
@@ -66,7 +64,6 @@
                         }
                     }
                 }
-                //compteur += 4;
             }
             if(affichage)
                 cout << endl;
@@ -78,9 +75,7 @@
         }
         bool dysfonctionnel = false;
         if(affichage) {
-            cout << "compteurErreurs: " << compteurErreurs << endl;
-            cout << "compteur: " << compteur << endl;
-            cout << "tauxErreur: " << tauxErreur << endl;
+            cout << "tauxErreur: " << tauxErreur << " %" << endl;
         }
         if (tauxErreur > 70.0) {
             dysfonctionnel = true;
@@ -104,13 +99,11 @@ double * Services::obtenirQualiteAirPosition(Database &d, Coordonnee coordonneeP
 
 
     for(const auto& it : d.getMCapteurs()) {
-        //string clef = it.first; // clef du capteur actuel
-        Capteur valeur = it.second; // valeur du capteur actuel
+        Capteur valeur = it.second;
         if(valeur.calculDistance(coordonneeParam) < rayonDeVerification) {
             if(verifierEtatCapteur(valeur, d, 0) == false) {
                 compteur ++;
                 for(const auto& itO3 : valeur.getLMesures_O3()){
-                    
                     if(itO3.first == dateParam){
                         tableau[0] += itO3.second.getValeur();
                     }

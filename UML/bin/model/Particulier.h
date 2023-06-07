@@ -16,7 +16,6 @@
 class Particulier : public Acteur {
 
     private:
-
         int m_nbPoints;
         bool m_honnete;
         std::list<Capteur> m_listeCapteurs;
@@ -37,5 +36,4 @@ class Particulier : public Acteur {
         std::list<Capteur> getListeCapteurs() const;
         void setListeCapteurs(std::list<Capteur> listeCapteurs);
 };
-
 #endif

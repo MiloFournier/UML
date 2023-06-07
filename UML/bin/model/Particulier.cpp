@@ -2,13 +2,6 @@
 
 using namespace std;
 
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <vector>
-#include <utility>
-#include <fstream>
-
 // Constructeur par défaut
 Particulier::Particulier() : m_nbPoints(0), m_honnete(false), m_listeCapteurs() {}
 
@@ -16,7 +9,6 @@ Particulier::Particulier() : m_nbPoints(0), m_honnete(false), m_listeCapteurs() 
 Particulier::Particulier(string id, int nbPoints, bool honnete) : Acteur(id), m_nbPoints(nbPoints), m_honnete(honnete), m_listeCapteurs() {}
 
 // Destructeur
-
 Particulier::~Particulier() {}
 
 // Accesseurs

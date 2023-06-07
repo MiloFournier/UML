@@ -1,11 +1,5 @@
 #include "Fournisseur.h"
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <vector>
-#include <utility>
-#include <fstream>
-using namespace std; 
+using namespace std;
 
 Fournisseur::Fournisseur(std::string id, std::list<Purificateur> listePurificateurs)
     : Acteur(id), m_listePurificateurs(listePurificateurs) {}

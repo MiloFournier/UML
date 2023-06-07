@@ -26,5 +26,4 @@ class Acteur {
         std::string getId() const;
         void setId(string id);
 };
-
 #endif

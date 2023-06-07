@@ -25,7 +25,6 @@ class Fournisseur : public Acteur {
         void setListePurificateurs(std::list<Purificateur> listePurificateurs);
 
     protected:
-
         std::list<Purificateur> m_listePurificateurs;
 };
-#endif // FOURNISSEUR_H
+#endif

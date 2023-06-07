@@ -1,4 +1,3 @@
-# Ajouter dans SRCS obtenirQualiteAirPosition.cpp, quantifierImpactPurificateur.cpp, verifierEtatCapteur.cpp, Services.cpp
 CC = g++
 CFLAGS = -std=c++11 -Wall -ggdb
 LDFLAGS =

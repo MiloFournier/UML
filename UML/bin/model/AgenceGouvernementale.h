@@ -11,10 +11,9 @@
 class AgenceGouvernementale : public Acteur {
 
     public:
-
         AgenceGouvernementale(std::string id);
         ~AgenceGouvernementale();
 
 };
 
-#endif // AGENCEGOUVERNEMENTALE_H
+#endif
